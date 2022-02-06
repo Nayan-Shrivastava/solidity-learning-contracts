@@ -1,0 +1,35 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.7;
+
+
+contract Enum{
+    enum Status {
+        Rejected, // 0 default
+        Pending, // 1
+        Completed // 2
+    }
+
+    Status public status;
+    struct Order {
+        address buyer;
+        Status status; 
+    }
+    Order[] public orders;
+
+    function get() view external returns (Status){
+        return status;
+    }
+
+    function set(Status _status) external{
+        status = _status;
+    }
+
+    function ship() external {
+        status = Status.Completed;
+    }
+
+    function reset() external {
+        delete status;
+    }
+
+}
